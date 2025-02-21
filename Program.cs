@@ -1,17 +1,17 @@
-using ProjetoAPI.Repository;
+using Microsoft.EntityFrameworkCore;
+using ProjetoAPI.Context;
+using ProjetoAPI.Endpoints;
+using ProjetoAPI.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+var connectionString = "Data Source=produtos.db";
+builder.Services.AddSqlite<ProdutosDbContext>(connectionString);
 
-var repo = new ProdutoRepository();
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -20,15 +20,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapProdutosEndpoints();
+
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapGet("/listarprodutos", () =>
-{
-    return repo.ListarProdutos();
-});
-
-app.MapControllers();
 
 app.Run();
