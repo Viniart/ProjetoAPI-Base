@@ -1,4 +1,5 @@
-﻿namespace ProjetoAPI.Model
+﻿
+namespace ProjetoAPI.Model
 {
     public class Produto
     {
