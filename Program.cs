@@ -37,6 +37,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapProdutosEndpoints();
+app.MapCategoriasEndpoints();
 
 app.UseHttpsRedirection();
 

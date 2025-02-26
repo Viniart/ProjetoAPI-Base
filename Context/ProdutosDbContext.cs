@@ -10,6 +10,7 @@ namespace ProjetoAPI.Context
             
         }
 
-        public DbSet<Produto> Produtos => Set<Produto>();
+        public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
     }
 }
